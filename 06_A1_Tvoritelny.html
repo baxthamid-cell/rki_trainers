@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Творительный падеж A1 — WORKING</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,sans-serif;background:#ede7f6;padding:20px}
+.container{max-width:900px;margin:auto;background:#ffffff;padding:20px;border-radius:12px}
+h1{color:#5e35b1}
+button{padding:8px 14px;margin:6px 6px 10px 0;background:#5e35b1;color:#fff;border:none;border-radius:6px;cursor:pointer}
+.theory{display:none;background:#f4f1fb;border-left:4px solid #5e35b1;padding:15px;margin-bottom:15px}
+.task{margin:12px 0}
+select{padding:4px}
+.icon{font-weight:bold;margin-left:10px}
+.correct{color:green}
+.wrong{color:red}
+#score{margin-top:15px;font-size:18px;font-weight:bold}
+.note{color:#5e35b1;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Творительный падеж — A1</h1>
+
+<button onclick="toggle('ru')">Теория (RU)</button>
+<button onclick="toggle('uz')">Nazariya (UZ)</button>
+
+<div id="theory-ru" class="theory">
+<b>Творительный падеж</b> отвечает на вопросы <b>кем?</b> и <b>чем?</b>.<br><br>
+
+Используется:
+<ul>
+<li>для обозначения <b>средства действия</b></li>
+<li>для обозначения <b>совместности</b> (предлог <b>«с»</b>)</li>
+</ul>
+
+<b>Примеры:</b><br>
+Я пишу <b>ручкой</b>.<br>
+Я рисую <b>мелом</b>.<br>
+Я иду <b>с другом</b>.<br>
+</div>
+
+<div id="theory-uz" class="theory">
+<b>Vosita kelishigi</b> <b>kim bilan?</b> <b>nima bilan?</b> savollariga javob beradi.<br><br>
+
+U harakat <b>kim yoki nima bilan</b> bajarilishini bildiradi.<br><br>
+
+<b>Misollar:</b><br>
+Я пишу ручкой. — Men <b>ruchka bilan</b> yozaman.<br>
+Я рисую мелом. — Men <b>bo‘r bilan</b> chizaman.<br>
+Я иду с другом. — Men <b>do‘st bilan</b> boraman.
+</div>
+
+<hr>
+<p class="note">Выбери правильный вариант:</p>
+<div id="tasks"></div>
+
+<button onclick="check()">Проверить</button>
+<div id="score"></div>
+
+<hr>
+<p>
+Автор и разработчик: <b>Бахтияр Хамидов</b>, Республика Узбекистан, 2025<br>
+Версия: <b>A1 / Творительный / WORKING v2</b>
+</p>
+
+</div>
+
+<script>
+function toggle(lang){
+ document.getElementById("theory-ru").style.display="none";
+ document.getElementById("theory-uz").style.display="none";
+ document.getElementById("theory-"+lang).style.display="block";
+}
+
+const data = [
+["Я пишу", ['ручку', 'ручкой', 'ручка'], "ручкой"],
+["Он работает", ['учителем', 'учителя', 'учитель'], "учителем"],
+["Мы идём", ['друга', 'с другом', 'друг'], "с другом"],
+["Она ест", ['ложкой', 'ложку', 'ложка'], "ложкой"],
+["Я горжусь", ['брата', 'брат', 'братом'], "братом"],
+["Мы играем", ['мяч', 'мяча', 'мячом'], "мячом"],
+["Она идёт", ['с мамой', 'маму', 'мама'], "с мамой"],
+["Он пишет", ['карандашом', 'карандаша', 'карандаш'], "карандашом"],
+["Мы работаем", ['учитель', 'учителями', 'учителя'], "учителями"],
+["Я иду", ['друга', 'с другом', 'друг'], "с другом"],
+["Он режет", ['нож', 'ножом', 'ножа'], "ножом"],
+["Она говорит", ['учителя', 'учитель', 'с учителем'], "с учителем"],
+["Я рисую", ['мела', 'мелом', 'мел'], "мелом"],
+["Я пишу", ['карандаш', 'карандашом', 'карандаша'], "карандашом"],
+["Он идёт", ['брат', 'брата', 'с братом'], "с братом"]
+];
+
+const container=document.getElementById("tasks");
+data.forEach((item,i)=>{
+ container.innerHTML+=`<div class="task">${i+1}. ${item[0]}
+ <select id="q${i}"><option value="">—</option>${item[1].map(v=>`<option>${v}</option>`).join("")}</select>
+ <span id="i${i}" class="icon"></span></div>`;
+});
+
+function check(){
+ let score=0;
+ data.forEach((item,i)=>{
+  const val=document.getElementById("q"+i).value;
+  const icon=document.getElementById("i"+i);
+  if(val===item[2]){icon.textContent="✔";icon.className="icon correct";score++;}
+  else{icon.textContent="❓";icon.className="icon wrong";}
+ });
+ document.getElementById("score").textContent=`Результат: ${score} из ${data.length}`;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Предложный падеж A1 — WORKING</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,sans-serif;background:#e3f2fd;padding:20px}
+.container{max-width:900px;margin:auto;background:#ffffff;padding:20px;border-radius:12px}
+h1{color:#1565c0}
+button{padding:8px 14px;margin:6px 6px 10px 0;background:#1565c0;color:#fff;border:none;border-radius:6px;cursor:pointer}
+.theory{display:none;background:#eef6ff;border-left:4px solid #1565c0;padding:15px;margin-bottom:15px}
+.task{margin:12px 0}
+select{padding:4px}
+.icon{font-weight:bold;margin-left:10px}
+.correct{color:green}
+.wrong{color:red}
+#score{margin-top:15px;font-size:18px;font-weight:bold}
+.note{color:#1565c0;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Предложный падеж — A1</h1>
+
+<button onclick="toggle('ru')">Теория (RU)</button>
+<button onclick="toggle('uz')">Nazariya (UZ)</button>
+
+<div id="theory-ru" class="theory">
+<b>Предложный падеж</b> отвечает на вопрос <b>где?</b>.<br><br>
+Используется <b>только для обозначения места</b> и <b>только с предлогом «в»</b>.<br><br>
+Примеры:<br>
+Я <b>в шко́ле</b>.<br>
+Мы <b>в го́роде</b>.
+</div>
+
+<div id="theory-uz" class="theory">
+<b>O‘rin kelishigi</b> bu yerda <b>qayerda?</b> savoliga javob beradi.<br><br>
+Misollar:<br>
+Я в шко́ле. — Men <b>maktabda</b>.<br>
+Мы в го́роде. — Biz <b>shaharda</b>.
+</div>
+
+<hr>
+<p class="note">Выбери правильный вариант:</p>
+<div id="tasks"></div>
+
+<button onclick="check()">Проверить</button>
+<div id="score"></div>
+
+<hr>
+<p>
+Автор и разработчик: <b>Бахтияр Хамидов</b>, Республика Узбекистан, 2025<br>
+Версия: <b>A1 / Предложный / WORKING v2</b>
+</p>
+
+</div>
+
+<script>
+function toggle(lang){
+ document.getElementById("theory-ru").style.display="none";
+ document.getElementById("theory-uz").style.display="none";
+ document.getElementById("theory-"+lang).style.display="block";
+}
+
+const data = [
+["Я", ['в шко́ле', 'в школу', 'в школе́'], "в шко́ле"],
+["Мы", ['в класс', 'в классу', 'в кла́ссе'], "в кла́ссе"],
+["Он", ['в город', 'в городе́', 'в го́роде'], "в го́роде"],
+["Она", ['в па́рке', 'в парке́', 'в парк'], "в па́рке"],
+["Я", ['в библиотеке́', 'в библиоте́ке', 'в библиотеку'], "в библиоте́ке"],
+["Мы", ['в доме́', 'в до́ме', 'в дом'], "в до́ме"],
+["Он", ['в магазин', 'в магази́не', 'в магазине́'], "в магази́не"],
+["Она", ['в ку́хне', 'в кухне́', 'в кухню'], "в ку́хне"],
+["Я", ['в школе́', 'в шко́ле', 'в школу'], "в шко́ле"],
+["Мы", ['в го́роде', 'в город', 'в городе́'], "в го́роде"],
+["Он", ['в парке́', 'в па́рке', 'в парк'], "в па́рке"],
+["Она", ['в библиотеке́', 'в библиотеку', 'в библиоте́ке'], "в библиоте́ке"],
+["Я", ['в класс', 'в классе́', 'в кла́ссе'], "в кла́ссе"],
+["Мы", ['в дом', 'в доме́', 'в до́ме'], "в до́ме"],
+["Он", ['в магазин', 'в магазине́', 'в магази́не'], "в магази́не"]
+];
+
+const container=document.getElementById("tasks");
+data.forEach((item,i)=>{
+ container.innerHTML+=`<div class="task">${i+1}. ${item[0]}
+ <select id="q${i}"><option value="">—</option>${item[1].map(v=>`<option>${v}</option>`).join("")}</select>
+ <span id="i${i}" class="icon"></span></div>`;
+});
+
+function check(){
+ let score=0;
+ data.forEach((item,i)=>{
+  const val=document.getElementById("q"+i).value;
+  const icon=document.getElementById("i"+i);
+  if(val===item[2]){icon.textContent="✔";icon.className="icon correct";score++;}
+  else{icon.textContent="❓";icon.className="icon wrong";}
+ });
+ document.getElementById("score").textContent=`Результат: ${score} из ${data.length}`;
+}
+</script>
+
+</body>
+</html>

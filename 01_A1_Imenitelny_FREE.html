@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Именительный падеж A1 — FREE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,sans-serif;background:#eef6ff;padding:20px}
+.container{max-width:900px;margin:auto;background:#ffffff;padding:20px;border-radius:12px}
+h1{color:#1e88e5}
+button{padding:8px 14px;margin:6px 6px 10px 0;background:#1e88e5;color:#fff;border:none;border-radius:6px;cursor:pointer}
+.theory{display:none;background:#f2f8ff;border-left:4px solid #1e88e5;padding:15px;margin-bottom:15px}
+.task{margin:12px 0}
+select{padding:4px}
+.icon{font-weight:bold;margin-left:10px}
+.correct{color:green}
+.wrong{color:red}
+#score{margin-top:15px;font-size:18px;font-weight:bold}
+.note{color:#1e88e5;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Именительный падеж — A1 (FREE)</h1>
+
+<button onclick="toggle('ru')">Теория (RU)</button>
+<button onclick="toggle('uz')">Nazariya (UZ)</button>
+
+<div id="theory-ru" class="theory">
+<b>Именительный падеж</b> отвечает на вопросы <b>кто?</b> и <b>что?</b>.<br><br>
+Он используется, когда мы:
+<ul>
+<li>называем предмет или человека</li>
+<li>говорим, <b>кто это</b> или <b>что это</b></li>
+</ul>
+
+<b>Примеры:</b><br>
+Это <b>школа</b>.<br>
+Я — <b>ученик</b>.<br>
+Это <b>книга</b>.<br><br>
+
+<b>На уровне A1:</b>
+<ul>
+<li>без предлогов</li>
+<li>без прилагательных</li>
+<li>без изменений формы слова</li>
+</ul>
+</div>
+
+<div id="theory-uz" class="theory">
+<b>Bosh kelishik</b> <b>kim?</b> <b>nima?</b> savollariga javob beradi.<br><br>
+
+<b>Misollar:</b><br>
+Это школа. — Bu <b>maktab</b>.<br>
+Я — ученик. — Men <b>o‘quvchiman</b>.<br>
+Это книга. — Bu <b>kitob</b>.
+</div>
+
+<hr>
+<p class="note">Выбери правильный вариант:</p>
+<div id="tasks"></div>
+
+<button onclick="check()">Проверить</button>
+<div id="score"></div>
+
+<hr>
+<p>
+Автор и разработчик: <b>Бахтияр Хамидов</b>, Республика Узбекистан, 2025<br>
+Версия: <b>A1 / Именительный / FREE / WORKING v2</b>
+</p>
+
+</div>
+
+<script>
+function toggle(lang){
+ document.getElementById("theory-ru").style.display="none";
+ document.getElementById("theory-uz").style.display="none";
+ document.getElementById("theory-"+lang).style.display="block";
+}
+
+const data = [
+["Это", ['школа', 'школу', 'школе'], "школа"],
+["Я —", ['ученику', 'ученик', 'ученика'], "ученик"],
+["Это", ['книгу', 'книга', 'книге'], "книга"],
+["Это", ['дома', 'дому', 'дом'], "дом"],
+["Я —", ['учитель', 'учителя', 'учителю'], "учитель"],
+["Это", ['парку', 'парк', 'парка'], "парк"],
+["Я —", ['школьник', 'школьника', 'школьнику'], "школьник"],
+["Это", ['городу', 'город', 'города'], "город"],
+["Это", ['магазина', 'магазину', 'магазин'], "магазин"],
+["Я —", ['друг', 'друга', 'другу'], "друг"],
+["Это", ['класса', 'класс', 'классу'], "класс"],
+["Я —", ['студент', 'студента', 'студенту'], "студент"],
+["Это", ['библиотека', 'библиотеку', 'библиотеке'], "библиотека"],
+["Я —", ['мама', 'маме', 'маму'], "мама"],
+["Это", ['улица', 'улицу', 'улице'], "улица"]
+];
+
+const container=document.getElementById("tasks");
+data.forEach((item,i)=>{
+ container.innerHTML+=`<div class="task">${i+1}. ${item[0]}
+ <select id="q${i}"><option value="">—</option>${item[1].map(v=>`<option>${v}</option>`).join("")}</select>
+ <span id="i${i}" class="icon"></span></div>`;
+});
+
+function check(){
+ let score=0;
+ data.forEach((item,i)=>{
+  const val=document.getElementById("q"+i).value;
+  const icon=document.getElementById("i"+i);
+  if(val===item[2]){icon.textContent="✔";icon.className="icon correct";score++;}
+  else{icon.textContent="❓";icon.className="icon wrong";}
+ });
+ document.getElementById("score").textContent=`Результат: ${score} из ${data.length}`;
+}
+</script>
+
+</body>
+</html>

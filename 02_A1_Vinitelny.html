@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Винительный падеж A1 — ЭТАЛОН</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,sans-serif;background:#eef6ff;padding:20px}
+.container{max-width:900px;margin:auto;background:#ffffff;padding:20px;border-radius:12px}
+h1{color:#43a047}
+button{padding:8px 14px;margin:6px 6px 10px 0;background:#43a047;color:#fff;border:none;border-radius:6px;cursor:pointer}
+.theory{display:none;background:#f1fff3;border-left:4px solid #43a047;padding:15px;margin-bottom:15px}
+.task{margin:12px 0}
+select{padding:4px}
+.icon{font-weight:bold;margin-left:10px}
+.correct{color:green}
+.wrong{color:red}
+#score{margin-top:15px;font-size:18px;font-weight:bold}
+.note{color:#43a047;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Винительный падеж — A1 (ЭТАЛОН)</h1>
+
+<button onclick="toggle('ru')">Теория (RU)</button>
+<button onclick="toggle('uz')">Nazariya (UZ)</button>
+
+<div id="theory-ru" class="theory">
+<b>Винительный падеж</b> отвечает на вопросы <b>кого?</b> и <b>что?</b>.<br><br>
+
+Он используется, когда мы говорим о <b>прямом объекте действия</b>.<br><br>
+
+<b>Важно (A1):</b>
+<ul>
+<li>неодушевлённые существительные мужского рода совпадают с именительным падежом</li>
+<li>одушевлённые существительные отвечают на вопрос <b>кого?</b></li>
+</ul>
+
+<b>Примеры:</b><br>
+Я вижу <b>дом</b>.<br>
+Я знаю <b>ученика</b>.<br>
+</div>
+
+<div id="theory-uz" class="theory">
+<b>Tushum kelishigi</b> <b>kimni?</b> <b>nimani?</b> savollariga javob beradi.<br><br>
+
+U harakatning <b>to‘g‘ridan-to‘g‘ri obyektini</b> bildiradi.<br><br>
+
+<b>Misollar:</b><br>
+Я вижу дом. — Men <b>uy</b> ko‘ryapman.<br>
+Я знаю ученика. — Men <b>o‘quvchini</b> bilaman.
+</div>
+
+<hr>
+<p class="note">Выбери правильный вариант:</p>
+<div id="tasks"></div>
+
+<button onclick="check()">Проверить</button>
+<div id="score"></div>
+
+<hr>
+<p>
+Автор и разработчик: <b>Бахтияр Хамидов</b>, Республика Узбекистан, 2025<br>
+Версия: <b>A1 / Винительный / ЭТАЛОН / WORKING v1</b>
+</p>
+
+</div>
+
+<script>
+function toggle(lang){
+ document.getElementById("theory-ru").style.display="none";
+ document.getElementById("theory-uz").style.display="none";
+ document.getElementById("theory-"+lang).style.display="block";
+}
+
+const data = [
+["Я вижу", ['книга', 'книге', 'книгу'], "книгу"],
+["Я знаю", ['ученик', 'ученика', 'ученику'], "ученика"],
+["Он читает", ['тексту', 'текст', 'текста'], "текст"],
+["Она любит", ['маму', 'мама', 'маме'], "маму"],
+["Мы смотрим", ['фильм', 'фильма', 'фильму'], "фильм"],
+["Я вижу", ['дому', 'дома', 'дом'], "дом"],
+["Он встретил", ['друга', 'другу', 'друг'], "друга"],
+["Я покупаю", ['хлеб', 'хлеба', 'хлебу'], "хлеб"],
+["Она знает", ['учителю', 'учитель', 'учителя'], "учителя"],
+["Мы читаем", ['книгу', 'книге', 'книга'], "книгу"],
+["Я вижу", ['город', 'городу', 'города'], "город"],
+["Он любит", ['папа', 'папе', 'папу'], "папу"],
+["Мы смотрим", ['телевизора', 'телевизор', 'телевизору'], "телевизор"],
+["Я знаю", ['брат', 'брата', 'брату'], "брата"],
+["Она читает", ['журнала', 'журналу', 'журнал'], "журнал"]
+];
+
+const container=document.getElementById("tasks");
+data.forEach((item,i)=>{
+ container.innerHTML+=`<div class="task">${i+1}. ${item[0]}
+ <select id="q${i}"><option value="">—</option>${item[1].map(v=>`<option>${v}</option>`).join("")}</select>
+ <span id="i${i}" class="icon"></span></div>`;
+});
+
+function check(){
+ let score=0;
+ data.forEach((item,i)=>{
+  const val=document.getElementById("q"+i).value;
+  const icon=document.getElementById("i"+i);
+  if(val===item[2]){icon.textContent="✔";icon.className="icon correct";score++;}
+  else{icon.textContent="❓";icon.className="icon wrong";}
+ });
+ document.getElementById("score").textContent=`Результат: ${score} из ${data.length}`;
+}
+</script>
+
+</body>
+</html>
